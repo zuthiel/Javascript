@@ -1,6 +1,6 @@
 (function(scope){
 
-	var version = "Weather plugin version 2";
+	var version = "Weather plugin version 3";
 	var openWeatherAPIKey = "4512ed7970224d30805e826affe9ef11";
 	var doc = scope.document;
 	var jData = {}
@@ -157,6 +157,26 @@
 		return fElem;
 	};
 
+	//Format date to be displayed
+	wQ.formatDate = function(date) {
+		var day = date.getDate(),
+  			monthIndex = date.getMonth(),
+  			year = date.getFullYear(),
+			months = [	"Enero",
+  						"Febrero",
+  						"Marzo",
+  						"Abril",
+  						"Mayo",
+  						"Junio",
+  						"Julio",
+  						"Agosto",
+  						"Septiembre",
+  						"Octubre",
+  						"Noviembre",
+  						"Diciembre"];
+  		return day + ' ' + months[monthIndex] + ' ' + year;
+	}
+
 	//Create weather widget
 	wQ.createWidget = function(objData, objWind) {
 
@@ -167,13 +187,16 @@
 			divdate = doc.createElement("div"),
 			divloc = doc.createElement("div"),
 			divwind = doc.createElement("div"),
-			wElem = doc.getElementById('weather');
+			wElem = doc.getElementById('weather'),
+			dateElem = wQ.formatDate(new Date()),
+			ktocTem = objData.main.temp - 273.15;
 
 		divtitle.appendChild(doc.createTextNode("Weather widget"));
 		img.src = 'http://openweathermap.org/img/w/'+objData.weather[0].icon+'.png';
-		divdate.appendChild(doc.createTextNode(new Date()));
-		divloc.appendChild(doc.createTextNode(objData.main.name + ' ' + objData.main.temp));
-		divwind.appendChild(doc.createTextNode(objWind.data.degree + ' ' + objWind.data.direction));
+		divimag.appendChild(img);
+		divdate.appendChild(doc.createTextNode(dateElem));
+		divloc.appendChild(doc.createTextNode(objData.name + ' ' + ktocTem +'°C'));
+		divwind.appendChild(doc.createTextNode(objData.wind.speed + 'm/s ' + objWind.data.direction));
 		
 		frag.appendChild(divtitle);
 		frag.appendChild(divimag);
@@ -182,7 +205,7 @@
 		frag.appendChild(divwind);
 		wElem.appendChild(frag);
 	}
-	
+
 	//Control versions
 	if(!scope.wQ) {
 		scope.wQ = wQ;

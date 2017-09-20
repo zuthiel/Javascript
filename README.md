@@ -1,4 +1,4 @@
-#Weather widget with javascript
+# [Weather widget with javascript]
 
 To use it just call form your javascript file:
 
