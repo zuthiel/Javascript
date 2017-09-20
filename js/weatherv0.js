@@ -46,7 +46,7 @@
             callback(xobj.responseText);
     	    }
     	}
-    	xobj.send(null);
+    	xobj.send(null); //We are not sending anything, with a POST or so.
 	}
 
 	wQ.weather = function(city,mode){

@@ -3,11 +3,8 @@
 	var version = "Weather plugin version 3";
 	var openWeatherAPIKey = "4512ed7970224d30805e826affe9ef11";
 	var doc = scope.document;
-	var jData = {}
 	
-	var wQ = function (){
-		//wQ.wind(jData);
-	};
+	var wQ = function (){};
 
 	//Return the version of the library
 	wQ.version = function () {
@@ -44,7 +41,7 @@
       setTimeout(deferred.resolve, ms);
      // We just need to return the promise not the whole deferred.
      return deferred.promise();
-  	}
+  	};
 
 	wQ.weather = function(city,mode){
 		//http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=html&appid=4512ed7970224d30805e826affe9ef11
@@ -175,7 +172,7 @@
   						"Noviembre",
   						"Diciembre"];
   		return day + ' ' + months[monthIndex] + ' ' + year;
-	}
+	};
 
 	//Create weather widget
 	wQ.createWidget = function(objData, objWind) {
@@ -204,7 +201,7 @@
 		frag.appendChild(divloc);
 		frag.appendChild(divwind);
 		wElem.appendChild(frag);
-	}
+	};
 
 	//Control versions
 	if(!scope.wQ) {
